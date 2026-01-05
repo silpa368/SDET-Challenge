@@ -1,0 +1,38 @@
+# Build and output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Test results
+TestResults/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+
+# Playwright
+UiTests/bin/
+UiTests/obj/
+.playwright/
+ms-playwright/
+
+# NuGet
+packages/
+*.nupkg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local env
+.env
+.env.local
+
+# Node modules (if using npm/yarn)
+node_modules/
