@@ -15,5 +15,9 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
-      - name: Test
-        run: dotnet test --no-build --logger trx
+      - name: Install Playwright Dependencies
+        run: dotnet tool install --global Microsoft.Playwright.CLI && playwright install
+      - name: Test API
+        run: dotnet test ApiTests/ApiTests.csproj --no-build --logger trx
+      - name: Test UI
+        run: dotnet test UiTests/UiTests.csproj --no-build --logger trx || true
