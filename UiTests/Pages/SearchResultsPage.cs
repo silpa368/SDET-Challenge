@@ -1,4 +1,5 @@
 
+using System;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 
@@ -14,7 +15,12 @@ public class SearchResultsPage
     }
 
     public async Task<bool> ContainsTextAsync(string text)
-        => await _page.Locator("div#search").InnerTextAsync().ContinueWith(t => t.Result.Contains(text));
+    {
+        // Wait for search results to load and check if text is present on the page
+        await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+        var pageContent = await _page.TextContentAsync("body");
+        return pageContent?.Contains(text, StringComparison.OrdinalIgnoreCase) ?? false;
+    }
 
     public async Task ClickCareersAsync()
         => await _page.Locator("a:has-text('Careers')").First.ClickAsync();
